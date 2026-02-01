@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCoupleById, getLoveLetters, getMemories, getImportantDates } from '../services/api';
+import { 
+  getCoupleById, 
+  getLoveLetters, 
+  getMemories, 
+  getImportantDates,
+  createLoveLetter,
+  createMemory,
+  createImportantDate,
+  deleteLoveLetter,
+  deleteMemory,
+  deleteImportantDate,
+  uploadCouplePhoto,
+  updateCouplePhoto,
+  uploadMemoryPhoto
+} from '../services/api';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -13,6 +27,13 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Add forms state
+  const [showAddLetterForm, setShowAddLetterForm] = useState(false);
+  const [showAddMemoryForm, setShowAddMemoryForm] = useState(false);
+  const [showAddDateForm, setShowAddDateForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [memoryPhotoFile, setMemoryPhotoFile] = useState(null);
 
   useEffect(() => {
     const coupleId = sessionStorage.getItem('coupleId');
@@ -59,6 +80,143 @@ const Dashboard = () => {
   const closeLetterModal = () => {
     setIsModalOpen(false);
     setTimeout(() => setSelectedLetter(null), 300);
+  };
+
+  // Handle adding new love letter
+  const handleAddLetter = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const coupleId = sessionStorage.getItem('coupleId');
+    
+    try {
+      const letterData = {
+        coupleId: parseInt(coupleId),
+        title: formData.get('title'),
+        content: formData.get('content'),
+        author: formData.get('author'),
+        letterDate: formData.get('letterDate'),
+      };
+      
+      await createLoveLetter(letterData);
+      const updatedLetters = await getLoveLetters(coupleId);
+      setLoveLetters(updatedLetters);
+      setShowAddLetterForm(false);
+      e.target.reset();
+    } catch (error) {
+      console.error('Error adding love letter:', error);
+      alert('Failed to add love letter');
+    }
+  };
+
+  // Handle adding new memory
+  const handleAddMemory = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const coupleId = sessionStorage.getItem('coupleId');
+    
+    try {
+      let imageUrl = '';
+      
+      // If user uploaded a file, upload it first
+      if (memoryPhotoFile) {
+        setUploading(true);
+        const uploadResponse = await uploadMemoryPhoto(memoryPhotoFile);
+        imageUrl = `http://localhost:8080${uploadResponse.url}`;
+      } else {
+        // Otherwise use the URL they entered
+        imageUrl = formData.get('imageUrl');
+      }
+      
+      const memoryData = {
+        coupleId: parseInt(coupleId),
+        title: formData.get('title'),
+        description: formData.get('description'),
+        memoryDate: formData.get('memoryDate'),
+        imageUrl: imageUrl,
+        location: formData.get('location'),
+        tags: formData.get('tags'),
+      };
+      
+      await createMemory(memoryData);
+      const updatedMemories = await getMemories(coupleId);
+      setMemories(updatedMemories);
+      setShowAddMemoryForm(false);
+      setMemoryPhotoFile(null);
+      e.target.reset();
+    } catch (error) {
+      console.error('Error adding memory:', error);
+      alert('Failed to add memory');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // Handle couple photo upload
+  const handleCouplePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+    
+    // Validate file size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Image size must be less than 5MB');
+      return;
+    }
+    
+    try {
+      setUploading(true);
+      const coupleId = sessionStorage.getItem('coupleId');
+      
+      // Upload file
+      const uploadResponse = await uploadCouplePhoto(file);
+      const photoUrl = `http://localhost:8080${uploadResponse.url}`;
+      
+      // Update couple photo URL in database
+      await updateCouplePhoto(coupleId, photoUrl);
+      
+      // Refresh couple data
+      const updatedCouple = await getCoupleById(coupleId);
+      setCoupleData(updatedCouple);
+      
+      alert('Photo uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      alert('Failed to upload photo');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // Handle adding new important date
+  const handleAddDate = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const coupleId = sessionStorage.getItem('coupleId');
+    
+    try {
+      const dateData = {
+        coupleId: parseInt(coupleId),
+        title: formData.get('title'),
+        description: formData.get('description'),
+        eventDate: formData.get('eventDate'),
+        category: formData.get('category'),
+        isRecurring: formData.get('isRecurring') === 'on',
+      };
+      
+      await createImportantDate(dateData);
+      const updatedDates = await getImportantDates(coupleId);
+      setImportantDates(updatedDates);
+      setShowAddDateForm(false);
+      e.target.reset();
+    } catch (error) {
+      console.error('Error adding important date:', error);
+      alert('Failed to add important date');
+    }
   };
 
   const formatDate = (dateString) => {
@@ -133,20 +291,33 @@ const Dashboard = () => {
 
           {/* Couple Photo */}
           <div className="couple-photo-container">
-            {coupleData.couplePhotoUrl ? (
-              <img
-                src={coupleData.couplePhotoUrl}
-                alt="Couple"
-                className="couple-photo"
-              />
-            ) : (
-              <div className="couple-photo-placeholder">
-                <span className="heart-icon">❤️</span>
-              </div>
-            )}
+            <div className="photo-wrapper">
+              {coupleData.couplePhotoUrl ? (
+                <img
+                  src={coupleData.couplePhotoUrl}
+                  alt="Couple"
+                  className="couple-photo"
+                />
+              ) : (
+                <div className="couple-photo-placeholder">
+                  <span className="heart-icon">❤️</span>
+                </div>
+              )}
+              <label className="photo-upload-btn" title="Upload couple photo">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png"
+                  onChange={handleCouplePhotoUpload}
+                  style={{ display: 'none' }}
+                  disabled={uploading}
+                />
+                {uploading ? '⏳' : '📷'}
+              </label>
+            </div>
             <p className="anniversary-text">
               Together since {formatDate(coupleData.anniversaryDate)}
             </p>
+            <p className="upload-hint">Click 📷 to upload photo (JPG/PNG, max 5MB)</p>
           </div>
 
           {/* His Card */}
@@ -172,7 +343,45 @@ const Dashboard = () => {
         <div className="tab-content">
           {activeTab === 'love-letter' && (
             <div className="love-letters-section">
-              <h2>Love Letters</h2>
+              <div className="section-header">
+                <h2>Love Letters</h2>
+                <button 
+                  className="add-button"
+                  onClick={() => setShowAddLetterForm(!showAddLetterForm)}
+                >
+                  {showAddLetterForm ? '✕ Cancel' : '+ Add Love Letter'}
+                </button>
+              </div>
+
+              {showAddLetterForm && (
+                <form className="add-form" onSubmit={handleAddLetter}>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Letter Title"
+                    required
+                  />
+                  <textarea
+                    name="content"
+                    placeholder="Write your love letter here..."
+                    rows="6"
+                    required
+                  ></textarea>
+                  <input
+                    type="text"
+                    name="author"
+                    placeholder="Your Name"
+                    required
+                  />
+                  <input
+                    type="date"
+                    name="letterDate"
+                    required
+                  />
+                  <button type="submit" className="submit-button">Save Love Letter</button>
+                </form>
+              )}
+
               {loveLetters.length === 0 ? (
                 <p className="empty-message">No love letters yet. Start writing one!</p>
               ) : (
@@ -201,7 +410,77 @@ const Dashboard = () => {
 
           {activeTab === 'memories' && (
             <div className="memories-section">
-              <h2>Our Memories</h2>
+              <div className="section-header">
+                <h2>Our Memories</h2>
+                <button 
+                  className="add-button"
+                  onClick={() => setShowAddMemoryForm(!showAddMemoryForm)}
+                >
+                  {showAddMemoryForm ? '✕ Cancel' : '+ Add Memory'}
+                </button>
+              </div>
+
+              {showAddMemoryForm && (
+                <form className="add-form" onSubmit={handleAddMemory}>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Memory Title"
+                    required
+                  />
+                  <textarea
+                    name="description"
+                    placeholder="Describe this special moment..."
+                    rows="4"
+                  ></textarea>
+                  <input
+                    type="date"
+                    name="memoryDate"
+                    required
+                  />
+                  
+                  <div className="file-input-group">
+                    <label className="file-label">
+                      📷 Upload Photo (JPG/PNG, max 5MB)
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png"
+                        onChange={(e) => setMemoryPhotoFile(e.target.files[0])}
+                        className="file-input"
+                      />
+                    </label>
+                    {memoryPhotoFile && (
+                      <span className="file-name">✓ {memoryPhotoFile.name}</span>
+                    )}
+                  </div>
+                  
+                  <div className="or-divider">
+                    <span>OR</span>
+                  </div>
+                  
+                  <input
+                    type="url"
+                    name="imageUrl"
+                    placeholder="Or paste image URL"
+                    disabled={memoryPhotoFile !== null}
+                  />
+                  
+                  <input
+                    type="text"
+                    name="location"
+                    placeholder="Location (optional)"
+                  />
+                  <input
+                    type="text"
+                    name="tags"
+                    placeholder="Tags (comma-separated, e.g., vacation, beach, 2024)"
+                  />
+                  <button type="submit" className="submit-button" disabled={uploading}>
+                    {uploading ? 'Uploading...' : 'Save Memory'}
+                  </button>
+                </form>
+              )}
+
               {memories.length === 0 ? (
                 <p className="empty-message">No memories captured yet.</p>
               ) : (
@@ -241,7 +520,49 @@ const Dashboard = () => {
 
           {activeTab === 'important-dates' && (
             <div className="dates-section">
-              <h2>Important Dates</h2>
+              <div className="section-header">
+                <h2>Important Dates</h2>
+                <button 
+                  className="add-button"
+                  onClick={() => setShowAddDateForm(!showAddDateForm)}
+                >
+                  {showAddDateForm ? '✕ Cancel' : '+ Add Date'}
+                </button>
+              </div>
+
+              {showAddDateForm && (
+                <form className="add-form" onSubmit={handleAddDate}>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Event Title"
+                    required
+                  />
+                  <textarea
+                    name="description"
+                    placeholder="Event Description (optional)"
+                    rows="3"
+                  ></textarea>
+                  <input
+                    type="date"
+                    name="eventDate"
+                    required
+                  />
+                  <select name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="birthday">Birthday</option>
+                    <option value="anniversary">Anniversary</option>
+                    <option value="special">Special Event</option>
+                    <option value="holiday">Holiday</option>
+                  </select>
+                  <label className="checkbox-label">
+                    <input type="checkbox" name="isRecurring" />
+                    <span>Recurring event (happens yearly)</span>
+                  </label>
+                  <button type="submit" className="submit-button">Save Date</button>
+                </form>
+              )}
+
               {importantDates.length === 0 ? (
                 <p className="empty-message">No important dates saved.</p>
               ) : (

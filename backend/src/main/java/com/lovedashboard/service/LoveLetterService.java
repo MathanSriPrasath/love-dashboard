@@ -26,16 +26,39 @@ public class LoveLetterService {
     }
     
     /**
+     * Create a new love letter
+     */
+    public LoveLetterDTO createLoveLetter(LoveLetterDTO dto) {
+        LoveLetter letter = new LoveLetter();
+        letter.setCoupleId(dto.getCoupleId());
+        letter.setTitle(dto.getTitle());
+        letter.setContent(dto.getContent());
+        letter.setAuthor(dto.getAuthor());
+        letter.setLetterDate(dto.getLetterDate());
+        
+        LoveLetter saved = loveLetterRepository.save(letter);
+        return convertToDTO(saved);
+    }
+    
+    /**
+     * Delete a love letter
+     */
+    public void deleteLoveLetter(Long id) {
+        loveLetterRepository.deleteById(id);
+    }
+    
+    /**
      * Convert LoveLetter entity to DTO
      */
     private LoveLetterDTO convertToDTO(LoveLetter letter) {
-        return new LoveLetterDTO(
-                letter.getId(),
-                letter.getTitle(),
-                letter.getContent(),
-                letter.getAuthor(),
-                letter.getLetterDate()
-        );
+        LoveLetterDTO dto = new LoveLetterDTO();
+        dto.setId(letter.getId());
+        dto.setCoupleId(letter.getCoupleId());
+        dto.setTitle(letter.getTitle());
+        dto.setContent(letter.getContent());
+        dto.setAuthor(letter.getAuthor());
+        dto.setLetterDate(letter.getLetterDate());
+        return dto;
     }
 }
 

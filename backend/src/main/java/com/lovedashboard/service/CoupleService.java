@@ -23,6 +23,19 @@ public class CoupleService {
     }
     
     /**
+     * Update couple photo URL
+     */
+    public CoupleDTO updateCouplePhoto(Long coupleId, String photoUrl) {
+        Couple couple = coupleRepository.findById(coupleId)
+                .orElseThrow(() -> new RuntimeException("Couple not found with id: " + coupleId));
+        
+        couple.setCouplePhotoUrl(photoUrl);
+        Couple updated = coupleRepository.save(couple);
+        
+        return convertToDTO(updated);
+    }
+    
+    /**
      * Convert Couple entity to DTO
      */
     private CoupleDTO convertToDTO(Couple couple) {

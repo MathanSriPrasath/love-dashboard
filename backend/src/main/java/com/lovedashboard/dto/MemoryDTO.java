@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class MemoryDTO {
     private Long id;
+    private Long coupleId;
     private String title;
     private String description;
     private LocalDate memoryDate;

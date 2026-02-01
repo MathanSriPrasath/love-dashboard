@@ -3,6 +3,7 @@ package com.lovedashboard.controller;
 import com.lovedashboard.dto.ImportantDateDTO;
 import com.lovedashboard.service.ImportantDateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,26 @@ public class ImportantDateController {
     public ResponseEntity<List<ImportantDateDTO>> getImportantDatesByCoupleId(@PathVariable Long coupleId) {
         List<ImportantDateDTO> dates = importantDateService.getImportantDatesByCoupleId(coupleId);
         return ResponseEntity.ok(dates);
+    }
+    
+    /**
+     * POST /api/important-dates
+     * Create a new important date
+     */
+    @PostMapping
+    public ResponseEntity<ImportantDateDTO> createImportantDate(@RequestBody ImportantDateDTO importantDateDTO) {
+        ImportantDateDTO created = importantDateService.createImportantDate(importantDateDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+    
+    /**
+     * DELETE /api/important-dates/{id}
+     * Delete an important date
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteImportantDate(@PathVariable Long id) {
+        importantDateService.deleteImportantDate(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
