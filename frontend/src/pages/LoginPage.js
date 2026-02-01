@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../services/api';
 import './LoginPage.css';
 
@@ -98,6 +98,10 @@ const LoginPage = () => {
           <button type="submit" className="login-button" disabled={loading}>
             {loading ? 'Unlocking...' : 'Unlock Dashboard'}
           </button>
+
+          <p className="signup-link">
+            New couple? <Link to="/signup">Create your Love Dashboard</Link>
+          </p>
         </form>
       </div>
     </div>

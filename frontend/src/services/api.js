@@ -19,6 +19,20 @@ export const login = async (anniversaryDate, herDateOfBirth, hisDateOfBirth) => 
   return response.data;
 };
 
+export const signup = async (signupData) => {
+  const response = await api.post('/auth/signup', signupData);
+  return response.data;
+};
+
+export const checkCoupleExists = async (anniversaryDate, herDateOfBirth, hisDateOfBirth) => {
+  const response = await api.post('/auth/check-exists', {
+    anniversaryDate,
+    herDateOfBirth,
+    hisDateOfBirth,
+  });
+  return response.data;
+};
+
 // Couple
 export const getCoupleById = async (coupleId) => {
   const response = await api.get(`/couple/${coupleId}`);
