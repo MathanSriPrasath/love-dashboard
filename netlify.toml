@@ -10,6 +10,10 @@
   # Base directory
   base = "/"
 
+# Build environment
+[build.environment]
+  NODE_VERSION = "18"
+
 # Redirect all routes to index.html for React Router
 [[redirects]]
   from = "/*"
