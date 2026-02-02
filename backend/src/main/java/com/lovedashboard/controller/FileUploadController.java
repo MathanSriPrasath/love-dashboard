@@ -22,6 +22,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileUploadController {
     
+    @Value("${APP_URL:http://localhost:8080}")
+    private String appUrl;
+    
     // Upload directory - will be created in backend folder
     private static final String UPLOAD_DIR = "uploads/images/";
     
@@ -126,8 +129,8 @@ public class FileUploadController {
             Path filePath = Paths.get(UPLOAD_DIR + newFilename);
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             
-            // Return file URL
-            String fileUrl = "/uploads/images/" + newFilename;
+            // Return full file URL with app URL
+            String fileUrl = appUrl + "/uploads/images/" + newFilename;
             
             Map<String, String> response = new HashMap<>();
             response.put("url", fileUrl);
