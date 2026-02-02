@@ -33,9 +33,9 @@ frontend/src/
    cd "path/to/love-dashboard/frontend"
    ```
 
-2. **Install the new package:**
+2. **Install the new packages:**
    ```bash
-   npm install react-easy-crop
+   npm install react-easy-crop normalize-wheel
    ```
 
 3. **Restart the frontend server:**
@@ -101,8 +101,8 @@ Works on all modern browsers:
 
 ## Troubleshooting
 
-### Issue: "react-easy-crop not found"
-**Solution:** Run `npm install react-easy-crop` in the frontend directory
+### Issue: "react-easy-crop not found" or "can't resolve 'normalize-wheel'"
+**Solution:** Run `npm install react-easy-crop normalize-wheel` in the frontend directory
 
 ### Issue: Image not uploading after crop
 **Solution:** 
