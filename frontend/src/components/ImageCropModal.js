@@ -38,8 +38,9 @@ const ImageCropModal = ({ imageSrc, onCropComplete, onCancel, aspectRatio = 1 })
     <div className="crop-modal-overlay">
       <div className="crop-modal">
         <div className="crop-modal-header">
-          <h3>Crop Image</h3>
+          <h3>Crop Your Photo</h3>
           <p>Drag to reposition and scroll to zoom</p>
+          <p className="crop-size-info">⭕ Preview shows exact display size (220px × 220px)</p>
         </div>
 
         <div className="crop-container">
@@ -53,6 +54,7 @@ const ImageCropModal = ({ imageSrc, onCropComplete, onCancel, aspectRatio = 1 })
             onCropComplete={onCropCompleteCallback}
             cropShape="round"
             showGrid={false}
+            cropSize={{ width: 220, height: 220 }}
           />
         </div>
 
