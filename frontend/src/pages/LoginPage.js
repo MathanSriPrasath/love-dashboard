@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../services/api';
+import FloatingEmojis from '../components/FloatingEmojis';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -50,6 +51,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
+      <FloatingEmojis />
       <div className="login-card">
         <div className="login-header">
           <h1>💕 Love Dashboard</h1>

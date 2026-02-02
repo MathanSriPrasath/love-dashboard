@@ -5,6 +5,8 @@
   min-height: 100vh;
   padding: 20px;
   background: linear-gradient(135deg, #FFC0CB 0%, #FFE5EC 100%);
+  position: relative;
+  overflow: hidden;
 }
 
 .signup-card {
@@ -16,6 +18,8 @@
   max-width: 550px;
   animation: fadeIn 0.6s ease-in;
   border: 1px solid #f0f0f0;
+  position: relative;
+  z-index: 1;
 }
 
 .signup-header {

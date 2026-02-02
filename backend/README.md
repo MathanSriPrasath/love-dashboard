@@ -139,10 +139,10 @@ The backend will start on **http://localhost:8080**
 |--------|----------|-------------|
 | GET | `/api/couple/{id}` | Get couple details |
 
-### Love Letters
+### Declaration of Loves
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/love-letters/couple/{coupleId}` | Get all love letters |
+| GET | `/api/love-letters/couple/{coupleId}` | Get all declaration of loves |
 
 ### Memories
 | Method | Endpoint | Description |
@@ -170,7 +170,7 @@ curl -X POST http://localhost:8080/api/auth/login \
 # Get couple information
 curl http://localhost:8080/api/couple/1
 
-# Get love letters
+# Get declaration of loves
 curl http://localhost:8080/api/love-letters/couple/1
 ```
 

@@ -10,7 +10,7 @@ Complete API reference for the Love Dashboard backend.
 
 1. [Authentication](#authentication)
 2. [Couple Management](#couple-management)
-3. [Love Letters](#love-letters)
+3. [Declaration of Loves](#love-letters)
 4. [Memories](#memories)
 5. [Important Dates](#important-dates)
 6. [Error Handling](#error-handling)
@@ -112,11 +112,11 @@ curl http://localhost:8080/api/couple/1
 
 ---
 
-## 💌 Love Letters
+## 💌 Declaration of Loves
 
-### Get All Love Letters
+### Get All Declaration of Loves
 
-Retrieve all love letters for a couple, ordered by date (most recent first).
+Retrieve all declaration of loves for a couple, ordered by date (most recent first).
 
 **Endpoint**: `GET /api/love-letters/couple/{coupleId}`
 
@@ -358,7 +358,7 @@ Create a new Postman collection with these requests:
 - Method: GET
 - URL: `http://localhost:8080/api/couple/1`
 
-**3. Get Love Letters**
+**3. Get Declaration of Loves**
 - Method: GET
 - URL: `http://localhost:8080/api/love-letters/couple/1`
 
@@ -395,7 +395,7 @@ async function getCouple(coupleId) {
   return await response.json();
 }
 
-// Get love letters
+// Get declaration of loves
 async function getLoveLetters(coupleId) {
   const response = await fetch(`http://localhost:8080/api/love-letters/couple/${coupleId}`);
   return await response.json();
@@ -420,7 +420,7 @@ if (authResult.success) {
 -- Get couple info
 SELECT * FROM couples WHERE id = 1;
 
--- Get love letters
+-- Get declaration of loves
 SELECT * FROM love_letters WHERE couple_id = 1 ORDER BY letter_date DESC;
 
 -- Get memories

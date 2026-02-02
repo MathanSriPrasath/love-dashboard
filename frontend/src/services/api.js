@@ -69,7 +69,7 @@ export const uploadMemoryPhoto = async (file) => {
   return response.data;
 };
 
-// Love Letters
+// Declarations of Love
 export const getLoveLetters = async (coupleId) => {
   const response = await api.get(`/love-letters/couple/${coupleId}`);
   return response.data;

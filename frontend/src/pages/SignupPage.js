@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../services/api';
+import FloatingEmojis from '../components/FloatingEmojis';
 import './SignupPage.css';
 
 const SignupPage = () => {
@@ -78,6 +79,7 @@ const SignupPage = () => {
 
   return (
     <div className="signup-container">
+      <FloatingEmojis />
       <div className="signup-card">
         <div className="signup-header">
           <h1>💕 Create Your Love Dashboard</h1>

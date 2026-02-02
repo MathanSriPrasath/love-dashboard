@@ -16,6 +16,7 @@ import {
   uploadMemoryPhoto
 } from '../services/api';
 import ImageCropModal from '../components/ImageCropModal';
+import FloatingEmojis from '../components/FloatingEmojis';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -88,7 +89,7 @@ const Dashboard = () => {
     setTimeout(() => setSelectedLetter(null), 300);
   };
 
-  // Handle adding new love letter
+  // Handle adding new declaration of love
   const handleAddLetter = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -109,8 +110,8 @@ const Dashboard = () => {
       setShowAddLetterForm(false);
       e.target.reset();
     } catch (error) {
-      console.error('Error adding love letter:', error);
-      alert('Failed to add love letter');
+      console.error('Error adding declaration:', error);
+      alert('Failed to add declaration');
     }
   };
 
@@ -315,6 +316,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <FloatingEmojis />
       {/* Navigation Bar */}
       <nav className="dashboard-nav">
         <h1 className="dashboard-title">💕 Love Dashboard</h1>
@@ -323,7 +325,7 @@ const Dashboard = () => {
             className={`nav-tab ${activeTab === 'love-letter' ? 'active' : ''}`}
             onClick={() => setActiveTab('love-letter')}
           >
-            Love Letter
+            Declaration of Love
           </button>
           <button
             className={`nav-tab ${activeTab === 'memories' ? 'active' : ''}`}
@@ -420,12 +422,12 @@ const Dashboard = () => {
           {activeTab === 'love-letter' && (
             <div className="love-letters-section">
               <div className="section-header">
-                <h2>Love Letters</h2>
+                <h2>Declarations of Love</h2>
                 <button 
                   className="add-button"
                   onClick={() => setShowAddLetterForm(!showAddLetterForm)}
                 >
-                  {showAddLetterForm ? '✕ Cancel' : '+ Add Love Letter'}
+                  {showAddLetterForm ? '✕ Cancel' : '+ Add Declaration'}
                 </button>
               </div>
 
@@ -439,7 +441,7 @@ const Dashboard = () => {
                   />
                   <textarea
                     name="content"
-                    placeholder="Write your love letter here..."
+                    placeholder="Write your declaration of love here..."
                     rows="6"
                     required
                   ></textarea>
@@ -454,12 +456,12 @@ const Dashboard = () => {
                     name="letterDate"
                     required
                   />
-                  <button type="submit" className="submit-button">Save Love Letter</button>
+                  <button type="submit" className="submit-button">Save Declaration</button>
                 </form>
               )}
 
               {loveLetters.length === 0 ? (
-                <p className="empty-message">No love letters yet. Start writing one!</p>
+                <p className="empty-message">No declarations yet. Start writing one!</p>
               ) : (
                 <div className="letters-grid">
                   {loveLetters.map((letter) => (
@@ -668,7 +670,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Love Letter Modal */}
+      {/* Declaration of Love Modal */}
       {isModalOpen && selectedLetter && (
         <div className="modal-overlay" onClick={closeLetterModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

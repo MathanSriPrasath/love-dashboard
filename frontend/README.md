@@ -68,15 +68,15 @@ The frontend will start on **http://localhost:3000**
 - Smooth animations
 
 ### Dashboard
-- **Top Navigation**: Tabs for Love Letter, Memories, and Important Dates
+- **Top Navigation**: Tabs for Declaration of Love, Memories, and Important Dates
 - **Couple Cards**: Her details, couple photo, his details
 - **Dynamic Content**: All data fetched from backend APIs
 - **Responsive Design**: Works on desktop, tablet, and mobile
 
 ### Tab Views
 
-**Love Letter Tab:**
-- Displays all love letters in a card grid
+**Declaration of Love Tab:**
+- Displays all declaration of loves in a card grid
 - Shows author, date, and content
 - Empty state message if no letters exist
 
@@ -111,7 +111,7 @@ The frontend communicates with the backend through the following endpoints:
 |----------|----------|--------|
 | Login | `/api/auth/login` | POST |
 | Get Couple | `/api/couple/{id}` | GET |
-| Get Love Letters | `/api/love-letters/couple/{coupleId}` | GET |
+| Get Declaration of Loves | `/api/love-letters/couple/{coupleId}` | GET |
 | Get Memories | `/api/memories/couple/{coupleId}` | GET |
 | Get Important Dates | `/api/important-dates/couple/{coupleId}` | GET |
 

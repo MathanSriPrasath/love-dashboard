@@ -22,7 +22,7 @@ Your full-stack Love Dashboard application has been successfully created!
 - **Modern React Application** with React Router
 - **2 Main Pages**: Login and Dashboard
 - **Beautiful UI**: Gradient backgrounds, smooth animations
-- **3 Interactive Tabs**: Love Letters, Memories, Important Dates
+- **3 Interactive Tabs**: Declaration of Loves, Memories, Important Dates
 - **Responsive Design**: Works on all screen sizes
 - **API Integration**: Complete Axios service layer
 
@@ -98,8 +98,8 @@ Mission 2026/
 ### Couple
 - `GET /api/couple/{id}` - Get couple details
 
-### Love Letters
-- `GET /api/love-letters/couple/{coupleId}` - Get all love letters
+### Declaration of Loves
+- `GET /api/love-letters/couple/{coupleId}` - Get all declaration of loves
 
 ### Memories
 - `GET /api/memories/couple/{coupleId}` - Get all memories
@@ -123,7 +123,7 @@ Mission 2026/
 - Couple photo display
 - Anniversary date showcase
 
-### 💌 Love Letters
+### 💌 Declaration of Loves
 - Multiple letter support
 - Author attribution
 - Date sorting
@@ -199,7 +199,7 @@ mysql -u root -p love_dashboard < backend/database/sample-data.sql
 - **Key fields**: anniversary_date, her_date_of_birth, his_date_of_birth
 
 ### love_letters
-- Stores love letters between partners
+- Stores declaration of loves between partners
 - **Foreign key**: couple_id
 
 ### memories
@@ -259,14 +259,14 @@ Edit `backend/database/sample-data.sql` with:
 - Your real dates
 - Your bios and quotes
 - Your photos URLs
-- Your love letters
+- Your declaration of loves
 - Your memories
 - Your important dates
 
 ### 3. Optional Enhancements
 
 **Easy Additions**:
-- Add more love letters via SQL
+- Add more declaration of loves via SQL
 - Upload more memories
 - Add more important dates
 - Change color scheme in CSS

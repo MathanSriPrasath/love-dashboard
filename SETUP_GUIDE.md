@@ -188,7 +188,7 @@ Your browser should automatically open to http://localhost:3000
 - Couple photo (center)
 - His card (right) with bio and quote
 - Tab content showing:
-  - Love Letters
+  - Declaration of Loves
   - Memories
   - Important Dates
 
@@ -282,7 +282,7 @@ npm start
 
 ## 📝 Adding More Data
 
-### Add a Love Letter
+### Add a Declaration of Love
 
 ```sql
 mysql -u root -p
@@ -372,7 +372,7 @@ For production deployment:
 - [ ] Frontend running on port 3000
 - [ ] Can login successfully
 - [ ] Dashboard displays your data
-- [ ] All three tabs working (Love Letters, Memories, Important Dates)
+- [ ] All three tabs working (Declaration of Loves, Memories, Important Dates)
 
 ---
 

@@ -41,7 +41,7 @@ mysql -u root -p
 USE love_dashboard;
 SELECT * FROM couples;
 
--- View all love letters
+-- View all declaration of loves
 SELECT * FROM love_letters WHERE couple_id = 1;
 
 -- View all memories
@@ -51,7 +51,7 @@ SELECT * FROM memories WHERE couple_id = 1;
 SELECT * FROM important_dates WHERE couple_id = 1;
 ```
 
-### Add New Love Letter
+### Add New Declaration of Love
 ```sql
 INSERT INTO love_letters (couple_id, title, content, author, letter_date) 
 VALUES (1, 'Title Here', 'Content here...', 'Author Name', '2024-02-01');
@@ -85,7 +85,7 @@ curl -X POST http://localhost:8080/api/auth/login \
 curl http://localhost:8080/api/couple/1
 ```
 
-### Get Love Letters
+### Get Declaration of Loves
 ```bash
 curl http://localhost:8080/api/love-letters/couple/1
 ```
@@ -315,7 +315,7 @@ UPDATE couples SET her_bio = 'New bio...' WHERE id = 1;
 DELETE FROM memories WHERE id = <memory_id>;
 ```
 
-### View Latest Love Letters
+### View Latest Declaration of Loves
 ```sql
 SELECT * FROM love_letters ORDER BY letter_date DESC LIMIT 5;
 ```

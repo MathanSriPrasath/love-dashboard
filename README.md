@@ -1,12 +1,12 @@
 # 💕 Love Dashboard
 
-A private, full-stack web application designed for couples to celebrate their relationship. Features a secure login system and a beautiful dashboard to view love letters, memories, and important dates.
+A private, full-stack web application designed for couples to celebrate their relationship. Features a secure login system and a beautiful dashboard to view declaration of loves, memories, and important dates.
 
 ## 🎯 Overview
 
 Love Dashboard is a clean, modern web application that provides:
 - **Secure Authentication**: Login using anniversary date and birth dates
-- **Love Letters**: Share and read heartfelt messages
+- **Declaration of Loves**: Share and read heartfelt messages
 - **Memories Gallery**: Store cherished moments with photos and descriptions
 - **Important Dates**: Track birthdays, anniversaries, and special events
 
@@ -139,7 +139,7 @@ All three dates must match the database records exactly.
 - `id`, `anniversary_date`, `her_name`, `her_date_of_birth`, `her_bio`, `her_favorite_quote`
 - `his_name`, `his_date_of_birth`, `his_bio`, `his_favorite_quote`, `couple_photo_url`
 
-**love_letters**: Stores love letters between partners
+**love_letters**: Stores declaration of loves between partners
 - `id`, `couple_id`, `title`, `content`, `author`, `letter_date`
 
 **memories**: Stores cherished memories with photos
@@ -156,8 +156,8 @@ All three dates must match the database records exactly.
 ### Couple
 - `GET /api/couple/{id}` - Get couple details
 
-### Love Letters
-- `GET /api/love-letters/couple/{coupleId}` - Get all love letters
+### Declaration of Loves
+- `GET /api/love-letters/couple/{coupleId}` - Get all declaration of loves
 
 ### Memories
 - `GET /api/memories/couple/{coupleId}` - Get all memories
@@ -180,8 +180,8 @@ All three dates must match the database records exactly.
   - Couple photo (center) with anniversary date
   - His card (right) with bio and favorite quote
 
-### Love Letter Tab
-- Grid layout of love letters
+### Declaration of Love Tab
+- Grid layout of declaration of loves
 - Shows author, date, and content
 - Smooth hover animations
 
@@ -203,7 +203,7 @@ All three dates must match the database records exactly.
 Use MySQL to insert data directly:
 
 ```sql
--- Add a new love letter
+-- Add a new declaration of love
 INSERT INTO love_letters (couple_id, title, content, author, letter_date) 
 VALUES (1, 'Title', 'Content...', 'Author Name', '2024-02-01');
 
