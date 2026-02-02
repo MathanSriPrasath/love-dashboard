@@ -17,6 +17,19 @@
   will-change: transform, opacity;
 }
 
+.floating-couple-name {
+  position: absolute;
+  color: #000000;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: float-up linear infinite;
+  user-select: none;
+  will-change: transform, opacity;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
 @keyframes float-up {
   0% {
     transform: translateY(100vh) rotate(0deg);

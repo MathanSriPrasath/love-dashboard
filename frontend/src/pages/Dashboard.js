@@ -316,7 +316,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <FloatingEmojis />
+      <FloatingEmojis herName={coupleData?.herName} hisName={coupleData?.hisName} />
       {/* Navigation Bar */}
       <nav className="dashboard-nav">
         <h1 className="dashboard-title">💕 Love Dashboard</h1>
