@@ -1,28 +1,39 @@
 .dashboard {
   min-height: 100vh;
-  background: linear-gradient(135deg, #FFC0CB 0%, #FFE5EC 100%);
+  background: 
+    linear-gradient(135deg, rgba(255, 192, 203, 0.9) 0%, rgba(255, 182, 193, 0.8) 50%, rgba(255, 229, 236, 0.9) 100%),
+    radial-gradient(circle at 20% 50%, rgba(255, 215, 230, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 192, 203, 0.3) 0%, transparent 50%);
+  background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
 }
 
 /* Navigation */
 .dashboard-nav {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(169, 169, 169, 0.15);
-  border-bottom: 2px solid #f5f5f5;
-  position: relative;
-  z-index: 10;
+  box-shadow: 0 4px 20px rgba(169, 169, 169, 0.15);
+  border-bottom: 1px solid rgba(255, 192, 203, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .dashboard-title {
-  font-size: 24px;
-  color: #A9A9A9;
+  font-size: 26px;
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB, #FFB6C1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .nav-tabs {
@@ -32,42 +43,63 @@
 
 .nav-tab {
   background: transparent;
-  border: 2px solid #A9A9A9;
-  color: #A9A9A9;
+  border: 2px solid rgba(169, 169, 169, 0.3);
+  color: #666;
   padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 192, 203, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.nav-tab:hover::before {
+  left: 100%;
 }
 
 .nav-tab:hover {
-  background: #f8f8f8;
+  background: rgba(255, 192, 203, 0.1);
   border-color: #FFC0CB;
-  color: #FFC0CB;
+  color: #FF69B4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.3);
 }
 
 .nav-tab.active {
-  background: #FFC0CB;
-  border-color: #FFC0CB;
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB);
+  border-color: transparent;
   color: white;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
 }
 
 .logout-button {
-  background: #A9A9A9;
+  background: linear-gradient(135deg, #A9A9A9, #8c8c8c);
   color: white;
   border: none;
   padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(169, 169, 169, 0.3);
 }
 
 .logout-button:hover {
-  background: #8c8c8c;
+  background: linear-gradient(135deg, #8c8c8c, #707070);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(169, 169, 169, 0.3);
+  box-shadow: 0 6px 20px rgba(169, 169, 169, 0.4);
 }
 
 /* Main Content */
@@ -193,11 +225,11 @@
 }
 
 .upload-hint {
-  color: rgba(255, 255, 255, 0.9);
+  color: #000000;
   font-size: 12px;
   text-align: center;
   margin-top: 5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .heart-icon {
@@ -205,27 +237,36 @@
 }
 
 .anniversary-text {
-  color: white;
-  font-weight: 600;
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Tab Content */
 .tab-content {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 6px 20px rgba(169, 169, 169, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 8px 32px rgba(169, 169, 169, 0.15);
   animation: fadeIn 0.6s ease-in;
-  border: 1px solid #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .tab-content h2 {
-  color: #A9A9A9;
-  margin-bottom: 25px;
-  font-size: 28px;
-  font-weight: 600;
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 28px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .empty-message {
@@ -248,21 +289,41 @@
 }
 
 .add-button {
-  background: #FFC0CB;
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 2px 8px rgba(255, 192, 203, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.add-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .add-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
 }
 
 /* Add Forms */
@@ -332,21 +393,25 @@
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #FFC0CB 0%, #FFB6C6 100%);
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB);
   color: white;
   border: none;
-  padding: 14px;
-  border-radius: 8px;
+  padding: 16px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(255, 192, 203, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 192, 203, 0.4);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.5);
+  background: linear-gradient(135deg, #FFC0CB, #FF69B4);
 }
 
 .submit-button:disabled {
@@ -429,21 +494,41 @@
 }
 
 .letter-card {
-  background: #fafafa;
-  padding: 20px;
-  border-radius: 10px;
-  border-left: 3px solid #FFC0CB;
-  transition: all 0.3s;
-  border: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbfc 100%);
+  padding: 24px;
+  border-radius: 16px;
+  border-left: 4px solid transparent;
+  background-image: 
+    linear-gradient(white, white),
+    linear-gradient(135deg, #FF69B4, #FFC0CB);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(169, 169, 169, 0.1);
   cursor: pointer;
   position: relative;
+  overflow: hidden;
+}
+
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.05), rgba(255, 192, 203, 0.05));
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .letter-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 192, 203, 0.25);
-  border-left-color: #FFC0CB;
-  background: #fff;
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.25);
+}
+
+.letter-card:hover::before {
+  opacity: 1;
 }
 
 .letter-card h3 {
@@ -486,16 +571,34 @@
 
 .memory-card {
   background: white;
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(169, 169, 169, 0.12);
-  transition: all 0.3s;
-  border: 1px solid #f5f5f5;
+  box-shadow: 0 6px 20px rgba(169, 169, 169, 0.12);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 192, 203, 0.2);
+  position: relative;
+}
+
+.memory-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF69B4, #FFC0CB, #FFB6C1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .memory-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 192, 203, 0.2);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(255, 105, 180, 0.25);
+}
+
+.memory-card:hover::after {
+  transform: scaleX(1);
 }
 
 .memory-image {
@@ -563,17 +666,40 @@
 .date-card {
   display: flex;
   gap: 20px;
-  background: #fafafa;
-  padding: 20px;
-  border-radius: 10px;
-  border-left: 3px solid #FFC0CB;
-  transition: all 0.3s;
-  border: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbfc 100%);
+  padding: 24px;
+  border-radius: 16px;
+  border-left: 4px solid transparent;
+  background-image: 
+    linear-gradient(white, white),
+    linear-gradient(135deg, #FF69B4, #FFC0CB);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(169, 169, 169, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.date-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255, 105, 180, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .date-card:hover {
-  transform: translateX(3px);
-  box-shadow: 0 6px 20px rgba(255, 192, 203, 0.2);
+  transform: translateX(8px);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.25);
+}
+
+.date-card:hover::before {
+  opacity: 1;
 }
 
 .date-icon {
