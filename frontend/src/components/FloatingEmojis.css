@@ -108,3 +108,86 @@
   }
 }
 
+/* Responsive Design for Floating Elements */
+
+/* Reduce animations on mobile for better performance */
+@media (max-width: 767px) {
+  .floating-emoji,
+  .floating-couple-name {
+    animation-duration: 15s !important; /* Slightly faster on mobile */
+  }
+  
+  /* Reduce wobble distance on mobile */
+  @keyframes float-wobble-left {
+    0% {
+      transform: translateY(100vh) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(75vh) translateX(-10px) rotate(90deg);
+    }
+    50% {
+      transform: translateY(50vh) translateX(0) rotate(180deg);
+    }
+    75% {
+      transform: translateY(25vh) translateX(-10px) rotate(270deg);
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-100px) translateX(0) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes float-wobble-right {
+    0% {
+      transform: translateY(100vh) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(75vh) translateX(10px) rotate(90deg);
+    }
+    50% {
+      transform: translateY(50vh) translateX(0) rotate(180deg);
+    }
+    75% {
+      transform: translateY(25vh) translateX(10px) rotate(270deg);
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-100px) translateX(0) rotate(360deg);
+      opacity: 0;
+    }
+  }
+}
+
+/* Minimal animations on very small devices */
+@media (max-width: 480px) {
+  .floating-emoji,
+  .floating-couple-name {
+    animation-duration: 12s !important;
+  }
+  
+  .floating-couple-name {
+    font-size: 14px;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .floating-emoji,
+  .floating-couple-name {
+    animation: none;
+    opacity: 0.1;
+  }
+}

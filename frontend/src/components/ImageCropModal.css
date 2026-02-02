@@ -170,8 +170,21 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive Design for All Devices */
+
+/* Tablets Landscape (768px - 1023px) */
+@media (max-width: 1023px) {
+  .crop-modal {
+    max-width: 550px;
+  }
+  
+  .crop-container {
+    height: 450px;
+  }
+}
+
+/* Tablets Portrait (600px - 767px) */
+@media (max-width: 767px) {
   .crop-modal {
     width: 95%;
     max-width: 500px;
@@ -180,9 +193,14 @@
   .crop-container {
     height: 400px;
   }
+  
+  .crop-modal-header h3 {
+    font-size: 18px;
+  }
 }
 
-@media (max-width: 600px) {
+/* Mobile Landscape (480px - 599px) */
+@media (max-width: 599px) {
   .crop-modal {
     width: 95%;
   }
@@ -194,11 +212,108 @@
   .crop-modal-header,
   .crop-controls,
   .crop-modal-actions {
-    padding: 15px 20px;
+    padding: 18px 22px;
+  }
+  
+  .crop-modal-header h3 {
+    font-size: 17px;
   }
   
   .crop-size-info {
     font-size: 12px !important;
   }
+  
+  .crop-modal-actions button {
+    padding: 11px;
+    font-size: 14px;
+  }
 }
 
+/* Mobile Portrait (375px - 479px) */
+@media (max-width: 479px) {
+  .crop-modal {
+    width: 95%;
+  }
+  
+  .crop-container {
+    height: 320px;
+  }
+  
+  .crop-modal-header,
+  .crop-controls,
+  .crop-modal-actions {
+    padding: 15px 18px;
+  }
+  
+  .crop-modal-header h3 {
+    font-size: 16px;
+  }
+  
+  .crop-modal-header p {
+    font-size: 12px;
+  }
+  
+  .crop-size-info {
+    font-size: 11px !important;
+  }
+  
+  .crop-controls label {
+    font-size: 13px;
+  }
+  
+  .crop-modal-actions {
+    gap: 12px;
+  }
+  
+  .crop-modal-actions button {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Extra Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+  .crop-modal {
+    width: 96%;
+  }
+  
+  .crop-container {
+    height: 280px;
+  }
+  
+  .crop-modal-header,
+  .crop-controls,
+  .crop-modal-actions {
+    padding: 12px 15px;
+  }
+  
+  .crop-modal-header h3 {
+    font-size: 15px;
+  }
+  
+  .crop-modal-header p {
+    font-size: 11px;
+  }
+  
+  .crop-size-info {
+    font-size: 10px !important;
+  }
+  
+  .crop-controls label {
+    font-size: 12px;
+  }
+  
+  .zoom-slider {
+    height: 5px;
+  }
+  
+  .zoom-slider::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .zoom-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+  }
+}

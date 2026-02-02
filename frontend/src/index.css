@@ -5,13 +5,13 @@
 }
 
 body {
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #FFC0CB 0%, #FFE5EC 100%);
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 code {
@@ -19,3 +19,99 @@ code {
     monospace;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 192, 203, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #FF69B4, #FFC0CB);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #FFC0CB, #FF69B4);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: #333;
+}
+
+::-moz-selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: #333;
+}
+
+/* Global focus outline for accessibility */
+*:focus-visible {
+  outline: 3px solid rgba(255, 105, 180, 0.5);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive Base Styles */
+
+/* Mobile devices - adjust scrollbar and text rendering */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 374px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  body {
+    font-size: 13px;
+  }
+}
+
+/* Ensure viewport is properly set for mobile */
+@media (max-width: 767px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}

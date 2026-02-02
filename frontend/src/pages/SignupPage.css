@@ -83,11 +83,20 @@
   transition: all 0.3s;
 }
 
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: rgba(255, 105, 180, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.08);
+}
+
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #FFC0CB;
-  box-shadow: 0 0 0 3px rgba(255, 192, 203, 0.1);
+  border-color: #FF69B4;
+  box-shadow: 
+    0 0 0 4px rgba(255, 105, 180, 0.12),
+    0 4px 12px rgba(255, 105, 180, 0.15);
+  transform: translateY(-1px);
 }
 
 .form-group textarea {
@@ -190,8 +199,37 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* Responsive Design */
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+  .signup-card {
+    max-width: 550px;
+    padding: 40px 35px;
+  }
+}
+
+/* Mobile Landscape (600px - 767px) */
+@media (max-width: 767px) {
+  .signup-container {
+    padding: 15px;
+  }
+  
+  .signup-card {
+    padding: 35px 25px;
+  }
+  
+  .signup-header h1 {
+    font-size: 26px;
+  }
+  
+  .signup-form h3 {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Portrait (480px - 599px) */
+@media (max-width: 599px) {
   .signup-card {
     padding: 30px 20px;
   }
@@ -200,12 +238,79 @@
     font-size: 24px;
   }
   
+  .signup-header p {
+    font-size: 13px;
+  }
+  
+  .signup-form h3 {
+    font-size: 17px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+  
+  .signup-button,
+  .back-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
   .button-group {
     flex-direction: column;
+    gap: 12px;
   }
   
   .back-button {
     width: 100%;
+  }
+}
+
+/* Small Mobile (375px - 479px) */
+@media (max-width: 479px) {
+  .signup-card {
+    padding: 25px 18px;
+  }
+  
+  .signup-header h1 {
+    font-size: 22px;
+  }
+  
+  .signup-form h3 {
+    font-size: 16px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .signup-button,
+  .back-button {
+    padding: 11px;
+    font-size: 14px;
+  }
+}
+
+/* Extra Small (320px and below) */
+@media (max-width: 374px) {
+  .signup-card {
+    padding: 20px 15px;
+  }
+  
+  .signup-header h1 {
+    font-size: 20px;
+  }
+  
+  .signup-header p {
+    font-size: 12px;
+  }
+  
+  .signup-form h3 {
+    font-size: 15px;
   }
 }
 

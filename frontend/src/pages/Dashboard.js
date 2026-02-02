@@ -18,6 +18,13 @@ import {
 import ImageCropModal from '../components/ImageCropModal';
 import FloatingEmojis from '../components/FloatingEmojis';
 import Footer from '../components/Footer';
+import { 
+  SkeletonCoupleCard, 
+  SkeletonCouplePhoto, 
+  SkeletonLetterCard, 
+  SkeletonMemoryCard, 
+  SkeletonDateCard 
+} from '../components/SkeletonLoader';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -304,9 +311,38 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="dashboard-loading">
-        <div className="loader"></div>
-        <p>Loading your love dashboard...</p>
+      <div className="dashboard">
+        <FloatingEmojis />
+        {/* Navigation Bar with skeleton */}
+        <nav className="dashboard-nav">
+          <h1 className="dashboard-title">💕 Love Dashboard</h1>
+          <div className="nav-tabs">
+            <button className="nav-tab">Declaration of Love</button>
+            <button className="nav-tab">Memories</button>
+            <button className="nav-tab">Important Dates</button>
+          </div>
+          <button className="logout-button">Logout</button>
+        </nav>
+
+        {/* Skeleton Content */}
+        <div className="dashboard-content">
+          <div className="couple-section">
+            <SkeletonCoupleCard />
+            <SkeletonCouplePhoto />
+            <SkeletonCoupleCard />
+          </div>
+
+          <div className="tab-content">
+            <div style={{ marginBottom: '30px', height: '32px', width: '300px', background: 'linear-gradient(90deg, rgba(255, 192, 203, 0.2), rgba(255, 192, 203, 0.3), rgba(255, 192, 203, 0.2))', backgroundSize: '200% 100%', animation: 'shimmer 1.5s ease-in-out infinite', borderRadius: '8px' }}></div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '20px' }}>
+              <SkeletonLetterCard />
+              <SkeletonLetterCard />
+              <SkeletonLetterCard />
+            </div>
+          </div>
+        </div>
+
+        <Footer />
       </div>
     );
   }

@@ -9,6 +9,9 @@ Love Dashboard is a clean, modern web application that provides:
 - **Declaration of Loves**: Share and read heartfelt messages
 - **Memories Gallery**: Store cherished moments with photos and descriptions
 - **Important Dates**: Track birthdays, anniversaries, and special events
+- **Fully Responsive**: Optimized for all devices - mobile, tablet, and desktop
+- **Image Cropping**: Upload and crop photos for the perfect display
+- **Smooth Loading**: Skeleton components for seamless transitions
 
 ## 🛠 Tech Stack
 
@@ -23,7 +26,9 @@ Love Dashboard is a clean, modern web application that provides:
 - **React 18**
 - **React Router 6**
 - **Axios**
-- **CSS3**
+- **react-easy-crop** (Image cropping)
+- **CSS3** with advanced animations
+- **Fully Responsive Design** (320px - 2560px+)
 
 ### Database
 - **MySQL 8.0+**
@@ -167,34 +172,66 @@ All three dates must match the database records exactly.
 
 ## 🎨 Features
 
-### Login Page
-- Beautiful gradient background
-- Clean, modern form design
-- Date validation
-- Error handling with friendly messages
+### 🔐 Login & Signup Pages
+- Beautiful gradient background with floating emojis
+- Clean, modern glass-morphism form design
+- Date validation and error handling
+- New couple registration system
+- Fully responsive for mobile devices
 
-### Dashboard
+### 🏠 Dashboard
 - **Top Navigation Bar**: Tab-based navigation with logout
 - **Couple Section**: 
   - Her card (left) with bio and favorite quote
-  - Couple photo (center) with anniversary date
+  - Couple photo (center) with anniversary date and upload feature
   - His card (right) with bio and favorite quote
+- **Dynamic Photo Upload**: Upload and crop couple photo
+- **Skeleton Loaders**: Smooth loading transitions
+- **Floating Background**: Animated hearts, roses, and couple names
 
-### Declaration of Love Tab
-- Grid layout of declaration of loves
-- Shows author, date, and content
-- Smooth hover animations
+### 💌 Declaration of Love Tab
+- Beautiful card grid layout
+- Modal view for full content reading
+- Add new declarations dynamically
+- Delete existing declarations
+- Author, date, and title display
+- Smooth hover animations and transitions
+- Fully scrollable modal
 
-### Memories Tab
-- Card-style layout with images
-- Location and date display
-- Tag support for categorization
-- Drive-like appearance
+### 📸 Memories Tab
+- Card-style layout with photos
+- Image upload with **cropping feature** (WhatsApp-style)
+- Location, date, and tag display
+- Add new memories with photos
+- Delete existing memories
+- Drive-like modern appearance
+- Responsive grid layout
 
-### Important Dates Tab
+### 📅 Important Dates Tab
 - Chronological list of events
 - Category badges (birthday, anniversary, etc.)
 - Recurring event indicators
+- Add new dates dynamically
+- Delete existing dates
+- Icon-based visual design
+
+### 📱 Responsive Design
+- **Mobile First**: Optimized for 320px+ screens
+- **Tablet Ready**: Perfect layout for iPads
+- **Desktop Enhanced**: Beautiful on large screens
+- **All Features Work**: Every feature is fully responsive
+- **Touch Optimized**: Large tap targets for mobile
+- **Performance**: Optimized animations for mobile devices
+- **Breakpoints**: 10 responsive breakpoints (320px - 2560px+)
+
+### 🎨 UI/UX Enhancements
+- **Glass Morphism**: Modern frosted glass effects
+- **Advanced Gradients**: Beautiful pink and cream color scheme
+- **Smooth Animations**: Cubic-bezier transitions
+- **Skeleton Loading**: Shimmer effect for loading states
+- **Custom Scrollbar**: Branded pink gradient scrollbar
+- **Accessibility**: Focus visible, reduced motion support
+- **Floating Elements**: Hearts, roses, and couple names animation
 
 ## 🔧 Customization
 
@@ -258,8 +295,23 @@ VALUES (1, 'Memory Title', 'Description...', '2024-01-15', 'url', 'Location', 't
 
 ## 📚 Additional Documentation
 
-- [Backend README](backend/README.md) - Detailed backend setup and API documentation
-- [Frontend README](frontend/README.md) - Frontend development and customization guide
+### Setup & Installation
+- [SETUP_GUIDE.md](SETUP_GUIDE.md) - Detailed setup instructions for development
+- [INSTALLATION_INSTRUCTIONS.md](INSTALLATION_INSTRUCTIONS.md) - Step-by-step installation for Windows/Mac
+
+### API & Development
+- [API_DOCUMENTATION.md](API_DOCUMENTATION.md) - Complete API reference
+- [Backend README](backend/README.md) - Backend-specific documentation
+- [Frontend README](frontend/README.md) - Frontend development guide
+
+### Responsive Design & Testing
+- [RESPONSIVE_TESTING_GUIDE.md](RESPONSIVE_TESTING_GUIDE.md) - **Complete responsive design testing guide**
+- [QUICK_RESPONSIVE_TEST.md](QUICK_RESPONSIVE_TEST.md) - **Quick checklist for responsive testing**
+- [RESPONSIVE_FEATURES_SUMMARY.md](RESPONSIVE_FEATURES_SUMMARY.md) - **Summary of all responsive features**
+
+### Reference Guides
+- [QUICK_REFERENCE.md](QUICK_REFERENCE.md) - Quick command reference
+- [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - Complete project summary
 
 ## 🤝 Contributing
 
