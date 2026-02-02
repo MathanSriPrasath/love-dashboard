@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../services/api';
 import FloatingEmojis from '../components/FloatingEmojis';
-import Footer from '../components/Footer';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -107,8 +106,6 @@ const LoginPage = () => {
           </p>
         </form>
       </div>
-
-      <Footer />
     </div>
   );
 };
