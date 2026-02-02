@@ -8,9 +8,6 @@ import {
   createLoveLetter,
   createMemory,
   createImportantDate,
-  deleteLoveLetter,
-  deleteMemory,
-  deleteImportantDate,
   uploadCouplePhoto,
   updateCouplePhoto,
   uploadMemoryPhoto
@@ -21,9 +18,7 @@ import Footer from '../components/Footer';
 import { 
   SkeletonCoupleCard, 
   SkeletonCouplePhoto, 
-  SkeletonLetterCard, 
-  SkeletonMemoryCard, 
-  SkeletonDateCard 
+  SkeletonLetterCard
 } from '../components/SkeletonLoader';
 import './Dashboard.css';
 
