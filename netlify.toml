@@ -2,7 +2,7 @@
 
 [build]
   # Build command
-  command = "cd frontend && npm install && npm run build"
+  command = "cd frontend && npm ci && npm run build"
   
   # Output directory
   publish = "frontend/build"
@@ -13,6 +13,7 @@
 # Build environment
 [build.environment]
   NODE_VERSION = "18"
+  NPM_VERSION = "9.5.0"
 
 # Redirect all routes to index.html for React Router
 [[redirects]]
