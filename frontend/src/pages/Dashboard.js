@@ -15,6 +15,7 @@ import {
   updateCouplePhoto,
   uploadMemoryPhoto
 } from '../services/api';
+import ImageCropModal from '../components/ImageCropModal';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -34,6 +35,11 @@ const Dashboard = () => {
   const [showAddDateForm, setShowAddDateForm] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [memoryPhotoFile, setMemoryPhotoFile] = useState(null);
+  
+  // Crop modal state
+  const [showCropModal, setShowCropModal] = useState(false);
+  const [imageToCrop, setImageToCrop] = useState(null);
+  const [cropType, setCropType] = useState(null); // 'couple' or 'memory'
 
   useEffect(() => {
     const coupleId = sessionStorage.getItem('coupleId');
@@ -108,6 +114,49 @@ const Dashboard = () => {
     }
   };
 
+  // Handle memory photo selection - trigger crop modal
+  const handleMemoryPhotoSelect = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+    
+    // Validate file size (10MB before crop)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Image size must be less than 10MB');
+      return;
+    }
+    
+    // Create preview URL and open crop modal
+    const imageUrl = URL.createObjectURL(file);
+    setImageToCrop(imageUrl);
+    setCropType('memory');
+    setShowCropModal(true);
+  };
+
+  // Handle cropped memory photo
+  const handleCroppedMemoryPhoto = async (croppedBlob) => {
+    try {
+      // Convert blob to file and store it
+      const file = new File([croppedBlob], 'memory-photo.jpg', { type: 'image/jpeg' });
+      setMemoryPhotoFile(file);
+      
+      // Clean up
+      setShowCropModal(false);
+      URL.revokeObjectURL(imageToCrop);
+      setImageToCrop(null);
+      
+      alert('Photo cropped successfully! Now fill in the memory details.');
+    } catch (error) {
+      console.error('Error processing cropped photo:', error);
+      alert('Failed to process photo');
+    }
+  };
+
   // Handle adding new memory
   const handleAddMemory = async (e) => {
     e.preventDefault();
@@ -151,8 +200,8 @@ const Dashboard = () => {
     }
   };
 
-  // Handle couple photo upload
-  const handleCouplePhotoUpload = async (e) => {
+  // Handle couple photo upload - trigger crop modal
+  const handleCouplePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     
@@ -162,15 +211,28 @@ const Dashboard = () => {
       return;
     }
     
-    // Validate file size (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      alert('Image size must be less than 5MB');
+    // Validate file size (10MB before crop)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Image size must be less than 10MB');
       return;
     }
     
+    // Create preview URL and open crop modal
+    const imageUrl = URL.createObjectURL(file);
+    setImageToCrop(imageUrl);
+    setCropType('couple');
+    setShowCropModal(true);
+  };
+
+  // Handle cropped couple photo upload
+  const handleCroppedCouplePhoto = async (croppedBlob) => {
     try {
       setUploading(true);
+      setShowCropModal(false);
       const coupleId = sessionStorage.getItem('coupleId');
+      
+      // Convert blob to file
+      const file = new File([croppedBlob], 'couple-photo.jpg', { type: 'image/jpeg' });
       
       // Upload file
       const uploadResponse = await uploadCouplePhoto(file);
@@ -183,6 +245,10 @@ const Dashboard = () => {
       const updatedCouple = await getCoupleById(coupleId);
       setCoupleData(updatedCouple);
       
+      // Clean up
+      URL.revokeObjectURL(imageToCrop);
+      setImageToCrop(null);
+      
       alert('Photo uploaded successfully!');
     } catch (error) {
       console.error('Error uploading photo:', error);
@@ -190,6 +256,16 @@ const Dashboard = () => {
     } finally {
       setUploading(false);
     }
+  };
+
+  // Handle crop modal cancel
+  const handleCropCancel = () => {
+    setShowCropModal(false);
+    if (imageToCrop) {
+      URL.revokeObjectURL(imageToCrop);
+    }
+    setImageToCrop(null);
+    setCropType(null);
   };
 
   // Handle adding new important date
@@ -441,11 +517,11 @@ const Dashboard = () => {
                   
                   <div className="file-input-group">
                     <label className="file-label">
-                      📷 Upload Photo (JPG/PNG, max 5MB)
+                      📷 Upload Photo (JPG/PNG, max 10MB)
                       <input
                         type="file"
                         accept="image/jpeg,image/jpg,image/png"
-                        onChange={(e) => setMemoryPhotoFile(e.target.files[0])}
+                        onChange={handleMemoryPhotoSelect}
                         className="file-input"
                       />
                     </label>
@@ -610,6 +686,16 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Image Crop Modal */}
+      {showCropModal && imageToCrop && (
+        <ImageCropModal
+          imageSrc={imageToCrop}
+          onCropComplete={cropType === 'couple' ? handleCroppedCouplePhoto : handleCroppedMemoryPhoto}
+          onCancel={handleCropCancel}
+          aspectRatio={1}
+        />
       )}
     </div>
   );

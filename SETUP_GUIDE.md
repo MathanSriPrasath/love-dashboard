@@ -146,6 +146,11 @@ npm install
 npm start
 ```
 
+**Note:** The `npm install` command will install all required dependencies including:
+- React and React Router for frontend framework
+- Axios for API calls
+- **react-easy-crop** for image cropping functionality (WhatsApp-style photo cropping)
+
 **Expected output:**
 ```
 Compiled successfully!
