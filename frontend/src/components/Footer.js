@@ -32,12 +32,19 @@ const Footer = () => {
       </div>
       
       <div className="footer-bottom">
-        <p className="footer-copyright">
-          © {currentYear} Love Dashboard. Made with 🖤 for couples everywhere.
-        </p>
-        <p className="footer-note">
-          Your love story, beautifully preserved.
-        </p>
+        <div className="footer-bottom-left">
+          <p className="footer-copyright">
+            © {currentYear} Love Dashboard. Made with 🖤 for couples everywhere.
+          </p>
+          <p className="footer-note">
+            Your love story, beautifully preserved.
+          </p>
+        </div>
+        <div className="footer-bottom-right">
+          <p className="footer-owner">
+            Owned by <span className="owner-name">MathanSriPrasath E</span>
+          </p>
+        </div>
       </div>
     </footer>
   );
