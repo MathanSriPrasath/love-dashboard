@@ -1,0 +1,30 @@
+# Netlify Configuration for Love Dashboard Frontend
+
+[build]
+  # Build command
+  command = "cd frontend && npm install && npm run build"
+  
+  # Output directory
+  publish = "frontend/build"
+  
+  # Base directory
+  base = "/"
+
+# Redirect all routes to index.html for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and CORS
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    X-XSS-Protection = "1; mode=block"
+
+# Environment variables will be set in Netlify dashboard
+# REACT_APP_API_URL = "https://your-backend.up.railway.app/api"
+
