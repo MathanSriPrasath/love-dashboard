@@ -2,8 +2,8 @@ import React from 'react';
 import './FloatingEmojis.css';
 
 const FloatingEmojis = () => {
-  // Love emojis to display
-  const emojis = ['🖤', '💋', '🍫', '💌', '🖤', '🌹', '💋', '🍫', '💝', '🖤', '💋', '🍫', '💌', '🖤', '🌹'];
+  // Only hearts and roses - more frequently
+  const emojis = ['🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹', '🖤', '🌹'];
   
   return (
     <div className="floating-emojis-container">
@@ -13,10 +13,10 @@ const FloatingEmojis = () => {
           className="floating-emoji"
           style={{
             left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 10}s`,
-            animationDuration: `${15 + Math.random() * 10}s`,
-            fontSize: `${20 + Math.random() * 30}px`,
-            opacity: 0.15 + Math.random() * 0.15,
+            animationDelay: `${Math.random() * 8}s`,
+            animationDuration: `${12 + Math.random() * 8}s`,
+            fontSize: `${25 + Math.random() * 35}px`,
+            opacity: 0.15 + Math.random() * 0.2,
           }}
         >
           {emoji}
