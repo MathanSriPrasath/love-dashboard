@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
         <div className="footer-bottom-right">
           <p className="footer-owner">
-            Owned by <span className="owner-name">MathanSriPrasath E</span>
+            Owned by <span className="owner-name">Bag-uh illa Bro</span>
           </p>
         </div>
       </div>
