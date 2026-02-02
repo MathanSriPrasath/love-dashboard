@@ -17,6 +17,7 @@ import {
 } from '../services/api';
 import ImageCropModal from '../components/ImageCropModal';
 import FloatingEmojis from '../components/FloatingEmojis';
+import Footer from '../components/Footer';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -699,6 +700,9 @@ const Dashboard = () => {
           aspectRatio={1}
         />
       )}
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
